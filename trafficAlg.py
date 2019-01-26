@@ -14,7 +14,7 @@ intersection = {}
 
 # Algorithm that checks if we need to switch the lights at intersection or extend the green
 def trafficAlg(intersection) :
-	currentGreen = 1 if intersection[1].waitTime == None else 2
+	currentGreen = 1 if intersection[1].trafficLight == 'green' else 2
 	currentRed = 2 if currentGreen == 1 else 1
 
 	#if there are no cars on stopped road and hasn't been waiting for 15 seconds
