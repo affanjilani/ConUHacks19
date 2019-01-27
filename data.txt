@@ -1,13 +1,13 @@
 {
   "images": [
     {
-      "image": "quad4.jpg", 
+      "image": "quad3.jpg", 
       "classifiers": [
         {
           "classes": [
             {
-              "score": 0.905, 
-              "class": "suvcarscars"
+              "score": 0.849, 
+              "class": "sedancars"
             }
           ], 
           "classifier_id": "Cars_1711990083", 

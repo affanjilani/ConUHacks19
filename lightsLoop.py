@@ -7,7 +7,7 @@ import cv2
 from DataStructs import Road
 
 from trafficAlg import changeLight
-from carSeperator import carSeperator,imageCropper
+from carSeparator import carSeparator
 from autoPicture import pullPicture1, pullPicture2
 from machine_function import machine_function
 
@@ -31,6 +31,7 @@ roadPicture2 = 'C:\\Users\\obiaf\\Documents\\ConUHacks19\\road_pics\\road2.jpg'
 
 carPics = os.path.join(dirpath,'.\\car_pics')
 
+regularRedLightTime = 5
 
 while True:
 	timeElapsed = intersection['totalTime'] + 1
@@ -38,6 +39,8 @@ while True:
 
 	greenRoad = 1 if intersection[1].trafficLight == 'green' else 2
 	redRoad = 2 if intersection[2].trafficLight == 'red' else 1
+	
+	time.sleep(regularRedLightTime)
 
 	if(greenRoad == 1):
 		os.system(takePicture1)
@@ -47,7 +50,7 @@ while True:
 		img = cv2.imread(roadPicture1)
 		greyIm = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
 
-		carSeperator(greyIm,greenRoad)
+		carSeparator(greyIm,greenRoad)
 
 	else:
 		os.system(takePicture2)
@@ -57,7 +60,7 @@ while True:
 		img = cv2.imread(roadPicture2)
 		greyIm = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
 
-		carSeperator(greyIm,greenRoad)
+		carSeparator(greyIm,greenRoad)
 		
 	numCars = 0
 	for i in range(1,4):

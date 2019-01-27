@@ -17,8 +17,8 @@ def machine_function(filepath):
 
 
     #List classifiers
-    classifiers = visual_recognition.list_classifiers(verbose=True).get_result()
-    print(json.dumps(classifiers,indent=2))
+    # classifiers = visual_recognition.list_classifiers(verbose=True).get_result()
+    # print(json.dumps(classifiers,indent=2))
     #print path
 
     # with open(os.path.join(path,'.\\SEDANCARS.zip'), 'rb') as Sedan_Cars, \
@@ -56,7 +56,7 @@ def machine_function(filepath):
             if (string[1].strip(' ') == '\"sedancars\"\n' or string[1].strip(' ') == '\"suvcarscars\"\n'):
                 counter = 1
 
-    print ('Counter: '+str(counter))
+    #print ('Counter: '+str(counter))
     return counter
 
 #machine_function(os.path.join(path, '.\\pics\\cars.jpg'))
