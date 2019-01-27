@@ -1,5 +1,8 @@
 import cv2
 import numpy as np
+import os.path
+
+my_path = os.path.abspath(os.path.dirname(__file__))
 
 def imageCropper(imagePath,startH,endH,startW,endW):
     # read the image
@@ -12,12 +15,19 @@ def imageCropper(imagePath,startH,endH,startW,endW):
     return greyIm[startH:endH,startW:endW]
 
 
-def carSeparator(croppedIm):
+def carSeparator(croppedIm, roadNumber):
+
     #cut the cropped  image to 4 quadrants
     quad1 = croppedIm[0:275,150:370]
     quad2 = croppedIm[0:320,379:]
     quad3 = croppedIm[280:585,0:225]
     quad4 = croppedIm[340:,230:480]
+
+    cv2.imwrite(os.path.join(my_path,'.\\car_pics\\road'+str(roadNumber)+'\\quad1.jpg'),quad1)
+    cv2.imwrite(os.path.join(my_path,'.\\car_pics\\road'+str(roadNumber)+'\\quad2.jpg'),quad2)
+    cv2.imwrite(os.path.join(my_path,'.\\car_pics\\road'+str(roadNumber)+'\\quad3.jpg'),quad3)
+    cv2.imwrite(os.path.join(my_path,'.\\car_pics\\road'+str(roadNumber)+'\\quad4.jpg'),quad4)
+
 
     return (quad1,quad2,quad3,quad4)
 

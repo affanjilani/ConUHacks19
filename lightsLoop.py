@@ -51,15 +51,17 @@ while 1:
 
 		cropped = imageCropper(roadPicture1, cropHeightStart1, cropHeightEnd1, cropWidthStart1, cropWidthEnd1)
 
+		carSeperator(cropped,greenRoad)
+
 	else:
 		os.system(takePicture2)
 
-		roadPicture = None
+		pullPicture2()
 
 		cropped = imageCropper(roadPicture2, cropHeightStart2, cropHeightEnd2, cropWidthStart2, cropWidthEnd2)
 
-	#seperate into 4 cars
-	carSeperator(cropped)
+		carSeperator(cropped,greenRoad)
+		
 
 	#################TODO: Send to Abdul's function to know car info##############
 
