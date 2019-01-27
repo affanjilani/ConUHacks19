@@ -1,6 +1,8 @@
 # Function that gets the number of cars at a certain intersection and the intersection number, and returns 
 # a string specifying what intersection gets green.
 
+import time
+
 #Class description
 class Road:
 	def __init__(self, numCars, trafficLight, waitTime, avgNumCars):
@@ -19,7 +21,9 @@ def trafficAlg(intersection) :
 
 	#if there are no cars on stopped road and hasn't been waiting for 15 seconds
 	if(intersection[currentRed].numCars == 0 & intersection[currentRed].waitTime <= 1):
-		return 'extend'	#extend the current green light
+		#extra delay since no cars
+		time.sleep(5)
+		return 'change'	#extend the current green light
 	else:
 		return 'change'	#if the waitTime is over 1 time step or there are cars waiting we change the light
 
@@ -39,12 +43,4 @@ def changeLight(intersection) :
 
 		currentRed.waitTime = None
 		currentRed.trafficLight = 'green'
-
-
-		
-def initIntersection():
-	intersection = {
-		1: Road(None, None, None, None),
-		2: Road(None, None, None, None),
-	}
 	
