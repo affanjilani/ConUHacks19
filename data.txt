@@ -1,0 +1,21 @@
+{
+  "images": [
+    {
+      "image": "quad4.jpg", 
+      "classifiers": [
+        {
+          "classes": [
+            {
+              "score": 0.87, 
+              "class": "suvcarscars"
+            }
+          ], 
+          "classifier_id": "Cars_1267438476", 
+          "name": "Cars"
+        }
+      ]
+    }
+  ], 
+  "custom_classes": 2, 
+  "images_processed": 1
+}

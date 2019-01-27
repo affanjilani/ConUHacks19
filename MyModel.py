@@ -38,36 +38,36 @@ visual_recognition = VisualRecognitionV3(
 
 
 # # THIS IS HOW YOU LIST ALL THE CLASSIFIERS
-# classifiers = visual_recognition.list_classifiers(verbose=True).get_result()
-# print(json.dumps(classifiers, indent=2))
+classifiers = visual_recognition.list_classifiers(verbose=True).get_result()
+print(json.dumps(classifiers, indent=2))
 
 
-# THIS IS HOW YOU CHECK A PHOTO(S)  ONTO OUR CLASSIFIER AND PUT OUTPUT INTO A TEXT FILE
-file = open('/Users/abdulrahim23/Desktop/data.txt','w')
-with open('/Users/abdulrahim23/Desktop/Hackathon/T3.jpg', 'rb') as images_file:
-    classes = visual_recognition.classify(
-        images_file,
-        classifier_ids=["Cars_1267438476"]).get_result()
+# # THIS IS HOW YOU CHECK A PHOTO(S)  ONTO OUR CLASSIFIER AND PUT OUTPUT INTO A TEXT FILE
+# file = open('C:\\Users\\obiaf\\Documents\\ConUHacks19\\data.txt','w')
+# with open('C:\\Users\\obiaf\\Documents\\ConUHacks19\\car_pics\\road2\\quad4.jpg', 'rb') as images_file:
+#     classes = visual_recognition.classify(
+#         images_file,
+#         classifier_ids=["Cars_1267438476"]).get_result()
 
-    file.write(str(json.dumps(classes, indent=2)))
-    file.close()
-print(json.dumps(classes, indent=2))
+#     file.write(str(json.dumps(classes, indent=2)))
+#     file.close()
+# print(json.dumps(classes, indent=2))
 #
 #
 # #CHECK THIS** EXTREMELY IMPORTANT WHERE THE EDITS HAPPENED***** HERE********
-# file1 = open('/Users/abdulrahim23/Desktop/data.txt','r')
-# counter = 0
-# for line in file1:
-#     str = line.strip(' ')
-#     str = str.split(':')
-#     if (str[0] == '\"score\"'):
-#         x = str[1]
-#         print x
-#         if(x>=0.60): #CHANGE THIS VALUE HERE TO OUR NEW THRESHOLD
-#              counter+=1
-#         else:
-#               counter+=0
-# print counter
+file1 = open('C:\\Users\\obiaf\\Documents\\ConUHacks19\\data.txt','r')
+counter = 0
+for line in file1:
+    string = line.strip(' ')
+    string = string.split(':')
+    if (string[0] == '\"score\"'):
+        x = string[1][1:-3]
+        print x
+        if(float(x)>=0.60): #CHANGE THIS VALUE HERE TO OUR NEW THRESHOLD
+             counter=1
+        else:
+              counter=0
+print counter
 #
 #
 #

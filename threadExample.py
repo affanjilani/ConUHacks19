@@ -42,18 +42,15 @@ carPics = os.path.join(dirpath,'.\\car_pics')
 
 #takes picture
 def takePic(cameraNumber):
-	print('in take Pic')
-	return 
-	greenRoad = 1 if intersection[1].trafficLight == 'green' else 2
 	if cameraNumber==1:
 		os.system(takePicture1)
-
+		# took picture
 		pullPicture1()
 		
 		img = cv2.imread(roadPicture1)
 		greyIm = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
 
-		carSeparator(greyIm,greenRoad)
+		carSeparator(greyIm,cameraNumber)
 
 	if cameraNumber==2:
 		os.system(takePicture2)
@@ -63,7 +60,7 @@ def takePic(cameraNumber):
 		img = cv2.imread(roadPicture2)
 		greyIm = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
 
-		carSeparator(greyIm,greenRoad)
+		carSeparator(greyIm,cameraNumber)
 
 def barrier():
 	barrierMutex.acquire()
@@ -89,10 +86,13 @@ def camera1():
 	return
 
 def camera2():
-	for i in range(0,10):
+	while True:
 		print 'camera2'
-		barrier()
-		time.sleep(1)
+		
+		barrierMutex.acquire()
+		takePic(2)
+		barrierMutex.release()
+		time.sleep(1)	
 	return
 
 def valueEval():

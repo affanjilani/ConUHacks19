@@ -38,7 +38,7 @@ def machine_function(filepath):
     with open(filepath, 'rb') as images_file:
      classes = visual_recognition.classify(
         images_file,
-        classifier_ids=["Cars_1711990083"]).get_result()
+        classifier_ids=["Cars_1267438476"]).get_result()
 
     file.write(str(json.dumps(classes, indent=2)))
     file.close()
@@ -52,9 +52,13 @@ def machine_function(filepath):
     for line in file1:
         string = line.strip(' ')
         string = string.split(':')
-        if (string[0] == '\"class\"'):
-            if (string[1].strip(' ') == '\"sedancars\"\n' or string[1].strip(' ') == '\"suvcarscars\"\n'):
-                counter = 1
+        if (string[0] == '\"score\"'):
+            x = string[1][1:-3]
+            print x
+            if(float(x)>=0.80): #CHANGE THIS VALUE HERE TO OUR NEW THRESHOLD
+                 counter=1
+            else:
+                  counter=0
 
     #print ('Counter: '+str(counter))
     return counter
