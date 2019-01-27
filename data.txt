@@ -1,0 +1,21 @@
+{
+  "images": [
+    {
+      "image": "cars.jpg", 
+      "classifiers": [
+        {
+          "classes": [
+            {
+              "score": 0.866, 
+              "class": "sedancars"
+            }
+          ], 
+          "classifier_id": "Cars_1711990083", 
+          "name": "Cars"
+        }
+      ]
+    }
+  ], 
+  "custom_classes": 2, 
+  "images_processed": 1
+}

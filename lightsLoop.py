@@ -7,7 +7,8 @@ from DataStructs import Road
 
 from trafficAlg import changeLight
 from carSeperator import carSeperator,imageCropper
-from autoPicture import pullPicture1
+from autoPicture import pullPicture1, pullPicture2
+from machine_function import machine_function
 
 # Global variables
 intersection = {
@@ -29,12 +30,15 @@ cropHeightEnd2 = 0
 cropWidthStart2 = 0
 cropWidthEnd2 = 0
 ##########################################################
+dirpath = os.path.abspath(os.path.dirname(__file__))
 
 takePicture1 = 'adb -s 9b28cb0d shell \"input keyevent KEYCODE_CAMERA\"'
 takePicture2 = 'adb -s 9b28cb0d shell \"input keyevent KEYCODE_CAMERA\"'
 
 roadPicture1 = 'C:\\Users\\obiaf\\Documents\\ConUHacks19\\road_pics\\road1.jpg'
 roadPicture2 = 'C:\\Users\\obiaf\\Documents\\ConUHacks19\\road_pics\\road2.jpg'
+
+carPics = os.path.join(dirpath,'.\\car_pics')
 
 
 while 1:
@@ -64,8 +68,9 @@ while 1:
 		
 
 	#################TODO: Send to Abdul's function to know car info##############
-
 	numCars = 0
+	for i in range(1,4):
+		numCars = numCars + machine_function(os.path.join(carPics, '.\\road'+str(greenRoad)+'\\quadrant'+str(i)+'.jpg'))
 	##############################################################################
 
 	#Returns tuple (numCars)

@@ -2,6 +2,7 @@
 # a string specifying what intersection gets green.
 
 import time
+from sendDataToArduino import sendData
 
 #Class description
 class Road:
@@ -20,7 +21,7 @@ def trafficAlg(intersection) :
 	currentRed = 2 if currentGreen == 1 else 1
 
 	#if there are no cars on stopped road and hasn't been waiting for 15 seconds
-	if(intersection[currentRed].numCars == 0 & intersection[currentRed].waitTime <= 1):
+	if(intersection[currentGreen].numCars != 0 and intersection[currentRed].waitTime <= 1):
 		#extra delay since no cars
 		time.sleep(5)
 		return 'change'	#extend the current green light
@@ -38,6 +39,8 @@ def changeLight(intersection) :
 
 	elif trafficAlg(intersection) == 'change':
 		# call wael's method for arduino
+		greenRoad = 1 if intersection[1].trafficLight == 'green' else 2
+		sendData(greenRoad)
 		currentGreen.waitTime = 0
 		currentGreen.trafficLight = 'red'
 
