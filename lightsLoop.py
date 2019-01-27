@@ -35,8 +35,12 @@ regularRedLightTime = 5
 
 def countCars():
 	numCars = 0
-	for i in range(1,5):
-		numCars = numCars + machine_function(os.path.join(carPics, '.\\road'+str(greenRoad)+'\\quad'+str(i)+'.jpg'))
+	for i in range(1,6):
+		#check the intersection if we are at the last iteration
+		if(i == 5):
+			numCars = numCars + machine_function(os.path.join(carPics, '.\\road' + str(greenRoad) + '\\intersection.jpg'))
+		else:
+			numCars = numCars + machine_function(os.path.join(carPics, '.\\road'+str(greenRoad)+'\\quad'+str(i)+'.jpg'))
 
 	intersection[greenRoad].numCars = numCars
 
@@ -85,25 +89,25 @@ def pedestrians(greenRoad) :
 		return True
 
 	elif (roadNumber == 2):
-	    print('Pedestrian pressed road number 2')
+		print('Pedestrian pressed road number 2')
 
-	    os.system(takePicture2)
+		os.system(takePicture2)
 
-	    pullPicture2()
+		pullPicture2()
 
-	    img = cv2.imread(roadPicture2)
-	    greyIm = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
+		img = cv2.imread(roadPicture2)
+		greyIm = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
 
-	    carSeparator(greyIm,greenRoad)
+		carSeparator(greyIm,greenRoad)
 
-	    numCars = countCars()
+		numCars = countCars()
 
-	    if numCars > 3:
-	    	time.sleep(5)
+		if numCars > 3:
+			time.sleep(5)
 
-	    changeLight(intersection)
+		changeLight(intersection)
 
-	    return True
+		return True
 	elif (roadNumber == 3):
 		return False
 
