@@ -1,0 +1,21 @@
+{
+  "images": [
+    {
+      "image": "quad3.jpg", 
+      "classifiers": [
+        {
+          "classes": [
+            {
+              "score": 0.849, 
+              "class": "sedancars"
+            }
+          ], 
+          "classifier_id": "Cars_1711990083", 
+          "name": "Cars"
+        }
+      ]
+    }
+  ], 
+  "custom_classes": 2, 
+  "images_processed": 1
+}
