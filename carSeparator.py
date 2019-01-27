@@ -23,25 +23,29 @@ def imageCropper(imagePath,startH,endH,startW,endW):
 
 def carSeparator(croppedIm, roadNumber):
 
-    #cut the cropped  image to 4 quadrants
+    #cut the cropped  image to 4 quadrants and the intersection
     if roadNumber == 1:
         quad1 = croppedIm[2950:3460,972:1282]
         quad2 = croppedIm[2646:3012,1136:1394]
         quad3 = croppedIm[2590:2916,754:1084]
         quad4 = croppedIm[2912:3306,518:870]
+        intersection = croppedIm[3670:, 0:970]
     else:
         quad1 = croppedIm[1520:1876,1732:2060]
         quad2 = croppedIm[1224:1540,1812:2112]
         quad3 = croppedIm[1204:1512,1464:1772]
         quad4 = croppedIm[1472:1848,1340:1676]
+        intersection = croppedIm[2060:2850,830:1990]
 
+    #save the images
     cv2.imwrite(os.path.join(my_path,'.\\car_pics\\road'+str(roadNumber)+'\\quad1.jpg'),quad1)
     cv2.imwrite(os.path.join(my_path,'.\\car_pics\\road'+str(roadNumber)+'\\quad2.jpg'),quad2)
     cv2.imwrite(os.path.join(my_path,'.\\car_pics\\road'+str(roadNumber)+'\\quad3.jpg'),quad3)
     cv2.imwrite(os.path.join(my_path,'.\\car_pics\\road'+str(roadNumber)+'\\quad4.jpg'),quad4)
+    cv2.imwrite(os.path.join(my_path,'.\\car_pics\\road'+str(roadNumber)+'\\intersection.jpg'), intersection)
 
 
-    return (quad1,quad2,quad3,quad4)
+    return (quad1,quad2,quad3,quad4,intersection)
 
 #function to show image
 def show(image):
