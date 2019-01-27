@@ -16,9 +16,7 @@ while True:
     #retreive the road number
     roadNumber = line[0]
 
-    if (roadNumber == 1):
-        pass
-        #TODO: Affan, call the function that capture an image of road 1..
-    elif (roadNumber == 2):
-        pass
-        #TODO: Affan, call the function that capture an image of road 2...
+    if roadNumber == "1":
+        print("1 was pressed")
+    elif roadNumber == "2":
+        print("2 was pressed")
