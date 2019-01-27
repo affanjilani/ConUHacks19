@@ -19,7 +19,9 @@ def machine_function(filepath):
     print(json.dumps(model, indent=3))
 
 # THIS IS HOW YOU CHECK A PHOTO(S)  ONTO OUR CLASSIFIER AND PUT OUTPUT INTO A TEXT FILE
-    file = open(os.path.abspath(os.path.dirname(__file__))) ##replace with file path
+    path = os.path.abspath(os.path.dirname(__file__))
+    path = os.path.join(path,'./data.txt')
+    file = open(path) ##replace with file path
     with open(filepath, 'rb') as images_file:
      classes = visual_recognition.classify(
         images_file,
@@ -30,7 +32,10 @@ def machine_function(filepath):
 
     # open a file to read and keep counter to count cars, so it has to read the absolute path of the file
     #and then "r" so it could read
-    file1 = open(os.path.abspath(os.path.dirname(__file__)))
+    path = os.path.abspath(os.path.dirname(__file__))
+    path = os.path.join(path,'./data.txt')
+    file1 = open(path)
+    #file1 = open(os.path.abspath(os.path.dirname(__file__)))
     counter = 0
     for line in file1:
         str = line.strip(' ')
