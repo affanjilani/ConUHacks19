@@ -52,11 +52,15 @@ def machine_function(filepath):
     for line in file1:
         string = line.strip(' ')
         string = string.split(':')
-        if (string[0] == '\"class\"'):
-            if (string[1].strip(' ') == '\"sedancars\"\n' or string[1].strip(' ') == '\"suvcarscars\"\n'):
-                counter = 1
+        if (string[0] == '\"score\"'):
+            x = string[1]
+            print x[1:-3]
+            if(float(x[1:-3])>=0.85):
+                counter=1
+            else:
+                counter=0
 
-    #print ('Counter: '+str(counter))
+    print ('Counter: '+str(counter))
     return counter
 
 #machine_function(os.path.join(path, '.\\pics\\cars.jpg'))

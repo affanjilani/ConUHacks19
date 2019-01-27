@@ -26,12 +26,12 @@ def pullPicture2():
 	os.system('adb -s '+camera2+' pull /sdcard/DCIM/Camera/road2.jpg C:\\Users\\obiaf\\Documents\\ConUHacks19\\road_pics')
 	os.system('adb -s '+camera2+' shell rm /sdcard/DCIM/Camera/road2.jpg')
 
-# os.system(takePicture1)
+os.system(takePicture1)
 
-# pullPicture1()
+pullPicture1()
 
 
-# os.system(takePicture2)
+os.system(takePicture2)
 
-# pullPicture2()
+pullPicture2()
 

@@ -49,21 +49,22 @@ def show(image):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-# if __name__ == "__main__":
-#     #croppedGrey = imageCropper("./road_pics/road1.jpg",780,1430,165,745)
-#     img = cv2.imread('./road_pics/road2.jpg')
-#     greyIm = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
-#     quadrants = carSeparator(greyIm,2)
+if __name__ == "__main__":
+    #croppedGrey = imageCropper("./road_pics/road1.jpg",780,1430,165,745)
+    img = cv2.imread('./road_pics/road2.jpg')
+    greyIm = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
+    quadrants = carSeparator(greyIm,2)
 
-#     img = cv2.imread('./road_pics/road1.jpg')
-#     greyIm = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
-#     quadrants = carSeparator(greyIm,1)
+    img = cv2.imread('./road_pics/road1.jpg')
+    greyIm = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
+    quadrants = carSeparator(greyIm,1)
 
-#     numCars = 0
-#     print 'here'
-#     for i in range(1,5):
-#         numCars = numCars + machine_function(os.path.join(carPics, '.\\road'+str(2)+'\\quad'+str(i)+'.jpg'))
-#     print numCars, 'numCars'
+    numCars = 0
+    print 'here'
+    for i in range(1,5):
+        print(os.path.join(carPics, '.\\road'+str(2)+'\\quad'+str(i)+'.jpg'))
+        numCars = numCars + machine_function(os.path.join(carPics, '.\\road'+str(2)+'\\quad'+str(i)+'.jpg'))
+    print numCars, 'numCars'
 
 #     # for i in quadrants:
 #     #     show(i)
