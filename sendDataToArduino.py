@@ -14,5 +14,3 @@ def sendData(byte):
         ser.write(b'5')
 
     time.sleep(3)
-
-
