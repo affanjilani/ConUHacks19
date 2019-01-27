@@ -54,7 +54,7 @@ def machine_function(filepath):
         string = string.split(':')
         if (string[0] == '\"score\"'):
             x = string[1][1:-3]
-            print x
+            #print x
             if(float(x)>=0.80): #CHANGE THIS VALUE HERE TO OUR NEW THRESHOLD
                  counter=1
             else:

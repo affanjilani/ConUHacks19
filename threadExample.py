@@ -12,7 +12,16 @@ from carSeparator import carSeparator
 from autoPicture import pullPicture1, pullPicture2
 from machine_function import machine_function
 
-from sendDataToArduino import sendData
+#from sendDataToArduino import sendData
+
+import serial
+import time
+
+#establish a connection with the arduino
+global ser 
+ser = serial.Serial('COM3',9600)
+
+time.sleep(2)#sleep for 2 seconds
 
 # Global variables
 intersection = {
@@ -106,14 +115,36 @@ def valueEval():
 		time.sleep(1)
 	return
 
+def pedestrians():
+	
+
+	while True:
+	    #read a line from arduino
+	    line = str(ser.readline())
+	    #split the line
+	    line = line.split('\'')
+	    #get the index that has the road number
+	    line = line[1]
+	    #retreive the road number
+	    roadNumber = line[0]
+
+	    if (roadNumber == '1'):
+	    	print('RoadNumber 1 Pedestrian waiting')
+	        intersection[1].pedestrianWaiting = True
+	    elif (roadNumber == '2'):
+	    	print('RoadNumber 2 Pedestrian waiting')
+	    	intersection[2].pedestrianWaiting = True
+
 
 camera1Thread = threading.Thread(target=camera1)
 camera2Thread = threading.Thread(target=camera2)
 valueThread = threading.Thread(target=valueEval)
+pedestrianThread = threading.Thread(target=pedestrians)
 
 camera1Thread.start()
 camera2Thread.start()
 valueThread.start()
+pedestrianThread.start()
 
 
 
@@ -132,19 +163,15 @@ def countCars(roadNumber):
 
 
 def eval():
-	print (str(intersection))
-	print ('Wait time 1' + str(intersection[1].trafficLight))
 	intersection['totalTime'] = intersection['totalTime'] + 1
 	if intersection[1].trafficLight == 'red':
 		intersection[1].waitTime = intersection[1].waitTime + 1
 		waitTime1 = intersection[1].waitTime
 		waitTime2 = 0
-		print(str(waitTime1)+'helo')
 	else:
 		intersection[2].waitTime = intersection[2].waitTime + 1
 		waitTime2 = intersection[2].waitTime
 		waitTime1 = 0
-		print(str(waitTime1)+'helo')
 
 	numCars1 = countCars(1)
 	numCars2 = countCars(2)
@@ -175,4 +202,16 @@ def changeLights(roadNumberToTurnOff, roadNumberToTurnOn):
 
 	intersection[roadNumberToTurnOff].waitTime = 0
 	intersection[roadNumberToTurnOn].waitTime = 0
+
+def sendData(byte):
+
+    if(byte == 2):
+        #sending a byte to arduino
+        ser.write(b'8')
+
+    elif(byte == 1):
+        # sending a byte to arduino
+        ser.write(b'5')
+
+    time.sleep(3)
 
