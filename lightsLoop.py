@@ -4,6 +4,8 @@ import os
 import time
 import cv2
 
+import threading
+
 from DataStructs import Road
 
 from trafficAlg import changeLight
@@ -13,8 +15,8 @@ from machine_function import machine_function
 
 # Global variables
 intersection = {
-	1: Road(0, 'green', 0, 0),
-	2: Road(0, 'red', None, 0),
+	1: Road(0, 'green', 0, 0, False),
+	2: Road(0, 'red', None, 0, False),
 	'totalTime': 0
 }
 
@@ -48,7 +50,36 @@ def countCars():
 
 	return numCars
 
-def pedestrians(greenRoad) :
+def pedestrianFunc():
+	import serial
+	import time
+
+	#establish a connection with the arduino
+	ser = serial.Serial('COM3',9600)
+
+	time.sleep(2)#sleep for 2 seconds
+
+	while True:
+	    #read a line from arduino
+	    line = str(ser.readline())
+	    #split the line
+	    line = line.split('\'')
+	    #get the index that has the road number
+	    line = line[1]
+	    #retreive the road number
+	    roadNumber = line[0]
+
+	    if (roadNumber == 1):
+	        intersection[1].pedestrianWaiting = True
+	    elif (roadNumber == 2):
+	    	intersection[2].pedestrianWaiting = True
+
+# Start pedestrian thread ##############################
+pedestrianThread = threading.Thread(target=pedestrianFunc)
+pedestrianThread.start()
+########################################################
+
+def pedestrians() :
 	import serial
 
 	#establish a connection with the arduino
@@ -117,11 +148,6 @@ while True:
 
 	greenRoad = 1 if intersection[1].trafficLight == 'green' else 2
 	redRoad = 2 if intersection[2].trafficLight == 'red' else 1
-	print('before pedestrians')
-	isPressed = pedestrians(greenRoad)
-	print('after pedestrians')
-	if(isPressed):
-		continue
 	
 	time.sleep(regularRedLightTime)
 
