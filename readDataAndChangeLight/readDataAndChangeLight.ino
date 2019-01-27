@@ -13,9 +13,9 @@ void setup() {
   Serial.begin(9600);
 
   // initialize the LED pin as an output:
-  pinMode(buttonPin1, INPUT);
+  pinMode(buttonPin1, INPUT_PULLUP);
   // initialize the pushbutton pin as an input:
-  pinMode(buttonPin2, INPUT);
+  pinMode(buttonPin2, INPUT_PULLUP);
   
   pinMode(7,OUTPUT);//red
   pinMode(6,OUTPUT);//yellow
@@ -42,6 +42,22 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
+  // read the state of the pushbutton value:
+  buttonState1 = digitalRead(buttonPin1);
+  buttonState2 = digitalRead(buttonPin2);
+
+  // check if the pushbutton is pressed. If it is, the buttonState is HIGH:, ONLY ONE BUTTON CAN BE PRESSED AT A TIME
+  if (buttonState1 == HIGH) {
+    // turn LED on:
+   Serial.println("1");
+   delay(2000);//delay
+  } 
+  else if (buttonState2 == HIGH){
+   Serial.println("2");
+   delay(2000);//delay
+  }
+
+  //if there is input in the buffer
   if(Serial.available() > 0){
     //basically atoi
     character = Serial.read() - 48;
@@ -51,18 +67,6 @@ void loop() {
     else if(character == 8){
       turnOff2TurnOn1();
     }
-  }
-  // read the state of the pushbutton value:
-  buttonState1 = digitalRead(buttonPin1);
-  buttonState2 = digitalRead(buttonPin2);
-
-  // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
-  if (buttonState1 == HIGH) {
-    // turn LED on:
-   Serial.println("1");
-  } else if (buttonState2==HIGH)
-  {
-   Serial.println("2");
   }
 }
 
