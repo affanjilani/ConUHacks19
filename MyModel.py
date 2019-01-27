@@ -31,7 +31,7 @@ visual_recognition = VisualRecognitionV3(
 #
 # with open('/Users/abdulrahim23/Desktop/Hackathon/Cardboard.zip', 'rb') as cardboard:
 #         model = visual_recognition.update_classifier(
-#         classifier_id="Cars_1711990083",
+#         classifier_id="Cars_1267438476",
 #
 #         cardboard_negative_examples=cardboard).get_result()
 # print(json.dumps(model, indent=2))
