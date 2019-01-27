@@ -66,7 +66,7 @@ def pedestrians(greenRoad) :
 	except:
 		roadNumber = 3
 
-	if (roadNumber == 1):
+	if (roadNumber == "1"):
 
 		print('Pedestrian pressed road number 1')
 		os.system(takePicture1)
@@ -88,7 +88,7 @@ def pedestrians(greenRoad) :
 
 		return True
 
-	elif (roadNumber == 2):
+	elif (roadNumber == "2"):
 		print('Pedestrian pressed road number 2')
 
 		os.system(takePicture2)
@@ -108,7 +108,7 @@ def pedestrians(greenRoad) :
 		changeLight(intersection)
 
 		return True
-	elif (roadNumber == 3):
+	elif (roadNumber == "3"):
 		return False
 
 while True:
