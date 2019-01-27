@@ -15,6 +15,8 @@ class Road:
 # Global variables
 intersection = {}
 
+regularRedLightTime = 5
+
 # Algorithm that checks if we need to switch the lights at intersection or extend the green
 def trafficAlg(intersection) :
 	currentGreen = 1 if intersection[1].trafficLight == 'green' else 2
@@ -33,13 +35,17 @@ def changeLight(intersection) :
 	currentGreen = intersection[1] if intersection[1].trafficLight == 'green' else intersection[2]
 	currentRed = intersection[2] if currentGreen == intersection[1] else intersection[2]
 
-	if trafficAlg(intersection) == 'extend':
-		# call wael's method for arduino
-		currentRed.waitTime = currentRed.waitTime+1
+	# if trafficAlg(intersection) == 'extend':
+	# 	# call wael's method for arduino
+	# 	currentRed.waitTime = currentRed.waitTime+1
 
-	elif trafficAlg(intersection) == 'change':
+	if trafficAlg(intersection) == 'change':
 		# call wael's method for arduino
 		greenRoad = 1 if intersection[1].trafficLight == 'green' else 2
+
+		#sleep for a given amount of time then reassess
+		time.sleep(regularRedLightTime)
+
 		sendData(greenRoad)
 		currentGreen.waitTime = 0
 		currentGreen.trafficLight = 'red'

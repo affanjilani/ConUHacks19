@@ -2,6 +2,7 @@
 
 import os
 import time
+import cv2
 
 from DataStructs import Road
 
@@ -17,23 +18,13 @@ intersection = {
 	'totalTime': 0
 }
 
-regularRedLightTime = 15
-
-##########TODO: PUT IN THESE VALUES#######################
-cropHeightStart1 = 0
-cropHeightEnd1 = 0
-cropWidthStart1 = 0
-cropWidthEnd1 = 0
-
-cropHeightStart2 = 0
-cropHeightEnd2 = 0
-cropWidthStart2 = 0
-cropWidthEnd2 = 0
-##########################################################
 dirpath = os.path.abspath(os.path.dirname(__file__))
 
-takePicture1 = 'adb -s 9b28cb0d shell \"input keyevent KEYCODE_CAMERA\"'
-takePicture2 = 'adb -s 9b28cb0d shell \"input keyevent KEYCODE_CAMERA\"'
+camera1 = "172.30.147.124:5555"
+camera2 = "988b9d3151484c554c"
+
+takePicture1 = 'adb -s '+camera1+' shell \"input keyevent KEYCODE_CAMERA\"'
+takePicture2 = 'adb -s '+camera2+' shell \"input keyevent KEYCODE_CAMERA\"'
 
 roadPicture1 = 'C:\\Users\\obiaf\\Documents\\ConUHacks19\\road_pics\\road1.jpg'
 roadPicture2 = 'C:\\Users\\obiaf\\Documents\\ConUHacks19\\road_pics\\road2.jpg'
@@ -41,7 +32,7 @@ roadPicture2 = 'C:\\Users\\obiaf\\Documents\\ConUHacks19\\road_pics\\road2.jpg'
 carPics = os.path.join(dirpath,'.\\car_pics')
 
 
-while 1:
+while True:
 	timeElapsed = intersection['totalTime'] + 1
 	intersection['totalTime'] = timeElapsed
 
@@ -53,32 +44,29 @@ while 1:
 
 		pullPicture1()
 
-		cropped = imageCropper(roadPicture1, cropHeightStart1, cropHeightEnd1, cropWidthStart1, cropWidthEnd1)
+		img = cv2.imread(roadPicture1)
+		greyIm = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
 
-		carSeperator(cropped,greenRoad)
+		carSeperator(greyIm,greenRoad)
 
 	else:
 		os.system(takePicture2)
 
 		pullPicture2()
 
-		cropped = imageCropper(roadPicture2, cropHeightStart2, cropHeightEnd2, cropWidthStart2, cropWidthEnd2)
+		img = cv2.imread(roadPicture2)
+		greyIm = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
 
-		carSeperator(cropped,greenRoad)
+		carSeperator(greyIm,greenRoad)
 		
-
-	#################TODO: Send to Abdul's function to know car info##############
 	numCars = 0
 	for i in range(1,4):
-		numCars = numCars + machine_function(os.path.join(carPics, '.\\road'+str(greenRoad)+'\\quadrant'+str(i)+'.jpg'))
-	##############################################################################
+		numCars = numCars + machine_function(os.path.join(carPics, '.\\road'+str(greenRoad)+'\\quad'+str(i)+'.jpg'))
 
-	#Returns tuple (numCars)
 	intersection[greenRoad].numCars = numCars
 
 	intersection[greenRoad].avgNumCars = float(((intersection[greenRoad].avgNumCars * (timeElapsed -1)) + numCars)/timeElapsed)
 
 	changeLight(intersection)
 
-	#sleep for a given amount of time then reassess
-	time.sleep(regularRedLightTime)
+	

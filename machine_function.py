@@ -19,7 +19,7 @@ def machine_function(filepath):
     #List classifiers
     classifiers = visual_recognition.list_classifiers(verbose=True).get_result()
     print(json.dumps(classifiers,indent=2))
-    print path
+    #print path
 
     # with open(os.path.join(path,'.\\SEDANCARS.zip'), 'rb') as Sedan_Cars, \
     #      open(os.path.join(path,'.\\SUVCARS.zip'), 'rb') as Suv_Cars, \
@@ -33,7 +33,7 @@ def machine_function(filepath):
 
 # # THIS IS HOW YOU CHECK A PHOTO(S)  ONTO OUR CLASSIFIER AND PUT OUTPUT INTO A TEXT FILE
     path1 = os.path.join(path,'.\\data.txt')
-    print path1
+    #print path1
     file = open(path1, 'w') ##replace with file path
     with open(filepath, 'rb') as images_file:
      classes = visual_recognition.classify(
@@ -54,10 +54,11 @@ def machine_function(filepath):
         string = string.split(':')
         if (string[0] == '\"class\"'):
             if (string[1].strip(' ') == '\"sedancars\"\n' or string[1].strip(' ') == '\"suvcarscars\"\n'):
-                counter += 1
+                counter = 1
 
-    print counter
+    print ('Counter: '+str(counter))
+    return counter
 
-machine_function(os.path.join(path, '.\\pics\\cars.jpg'))
+#machine_function(os.path.join(path, '.\\pics\\cars.jpg'))
 
 
