@@ -33,12 +33,91 @@ carPics = os.path.join(dirpath,'.\\car_pics')
 
 regularRedLightTime = 5
 
+def countCars():
+	numCars = 0
+	for i in range(1,5):
+		numCars = numCars + machine_function(os.path.join(carPics, '.\\road'+str(greenRoad)+'\\quad'+str(i)+'.jpg'))
+
+	intersection[greenRoad].numCars = numCars
+
+	intersection[greenRoad].avgNumCars = float(((intersection[greenRoad].avgNumCars * (timeElapsed -1)) + numCars)/timeElapsed)
+
+	return numCars
+
+def pedestrians(greenRoad) :
+	import serial
+
+	#establish a connection with the arduino
+	ser = serial.Serial('COM3',9600)
+	#read a line from arduino
+	try:
+		line = str(ser.readline())
+		#split the line
+		line = line.split('\'')
+		#get the index that has the road number
+		line = line[1]
+		#retreive the road number
+		roadNumber = line[0]
+
+	except:
+		roadNumber = 3
+
+	if (roadNumber == 1):
+
+		print('Pedestrian pressed road number 1')
+		os.system(takePicture1)
+
+		pullPicture1()
+		
+		img = cv2.imread(roadPicture1)
+		greyIm = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
+
+		carSeparator(greyIm,greenRoad)
+
+		numCars = countCars()
+
+		if numCars > 3:
+			time.sleep(5)
+
+
+		changeLight(intersection)
+
+		return True
+
+	elif (roadNumber == 2):
+	    print('Pedestrian pressed road number 2')
+
+	    os.system(takePicture2)
+
+	    pullPicture2()
+
+	    img = cv2.imread(roadPicture2)
+	    greyIm = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
+
+	    carSeparator(greyIm,greenRoad)
+
+	    numCars = countCars()
+
+	    if numCars > 3:
+	    	time.sleep(5)
+
+	    changeLight(intersection)
+
+	    return True
+	elif (roadNumber == 3):
+		return False
+
 while True:
 	timeElapsed = intersection['totalTime'] + 1
 	intersection['totalTime'] = timeElapsed
 
 	greenRoad = 1 if intersection[1].trafficLight == 'green' else 2
 	redRoad = 2 if intersection[2].trafficLight == 'red' else 1
+	print('before pedestrians')
+	isPressed = pedestrians(greenRoad)
+	print('after pedestrians')
+	if(isPressed):
+		continue
 	
 	time.sleep(regularRedLightTime)
 
@@ -62,13 +141,7 @@ while True:
 
 		carSeparator(greyIm,greenRoad)
 		
-	numCars = 0
-	for i in range(1,4):
-		numCars = numCars + machine_function(os.path.join(carPics, '.\\road'+str(greenRoad)+'\\quad'+str(i)+'.jpg'))
-
-	intersection[greenRoad].numCars = numCars
-
-	intersection[greenRoad].avgNumCars = float(((intersection[greenRoad].avgNumCars * (timeElapsed -1)) + numCars)/timeElapsed)
+	countCars()
 
 	changeLight(intersection)
 

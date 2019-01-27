@@ -8,6 +8,7 @@ int buttonState2 = 0;
 // variable for reading the pushbutton status
 
 void setup() {
+  Serial.begin(9600);
   // initialize the LED pin as an output:
   pinMode(buttonPin1, INPUT);
   // initialize the pushbutton pin as an input:
@@ -22,9 +23,9 @@ void loop() {
   // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
   if (buttonState1 == HIGH) {
     // turn LED on:
-   Serial.println("2");
+   Serial.println("1");
   } else if (buttonState2==HIGH)
   {
-   Serial.println("1");
+   Serial.println("2");
   }
 }

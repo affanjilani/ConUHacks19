@@ -1,8 +1,21 @@
 int character = 0;
+// constants won't change. They're used here to set pin numbers:
+const int buttonPin1 = 3;     // the number of the pushbutton pin
+const int buttonPin2 = 4;
+
+// variables will change:
+int buttonState1 = 0;   
+int buttonState2 = 0;
+// variable for reading the pushbutton status
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
+
+  // initialize the LED pin as an output:
+  pinMode(buttonPin1, INPUT);
+  // initialize the pushbutton pin as an input:
+  pinMode(buttonPin2, INPUT);
   
   pinMode(7,OUTPUT);//red
   pinMode(6,OUTPUT);//yellow
@@ -23,6 +36,7 @@ void setup() {
   delay(1000);//wait for 1 second
   switchLow(5);//init, turn on green light on road 1
   switchLow(10);//init, turn on red light on road 2
+
   
 }
 
@@ -37,6 +51,18 @@ void loop() {
     else if(character == 8){
       turnOff2TurnOn1();
     }
+  }
+  // read the state of the pushbutton value:
+  buttonState1 = digitalRead(buttonPin1);
+  buttonState2 = digitalRead(buttonPin2);
+
+  // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
+  if (buttonState1 == HIGH) {
+    // turn LED on:
+   Serial.println("1");
+  } else if (buttonState2==HIGH)
+  {
+   Serial.println("2");
   }
 }
 
