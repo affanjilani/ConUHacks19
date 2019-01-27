@@ -15,14 +15,3 @@ def sendData(byte):
 
     time.sleep(3)
 
-
-def main():
-    sendData(1)
-    sendData(2)
-    sendData(1)
-    sendData(2)
-    sendData(1)
-    sendData(2)
-
-main()
-
