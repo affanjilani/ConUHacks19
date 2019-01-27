@@ -21,6 +21,7 @@ def carSeparator(croppedIm):
 
     return (quad1,quad2,quad3,quad4)
 
+#function to show image
 def show(image):
     cv2.imshow('image', image)
     cv2.waitKey(0)
