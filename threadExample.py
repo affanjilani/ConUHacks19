@@ -86,7 +86,6 @@ def barrier():
 
 def camera1():
 	while True:
-		print 'camera1'
 
 		barrierMutex.acquire()
 		takePic(1)
@@ -96,7 +95,6 @@ def camera1():
 
 def camera2():
 	while True:
-		print 'camera2'
 		
 		barrierMutex.acquire()
 		takePic(2)
@@ -106,11 +104,9 @@ def camera2():
 
 def valueEval():
 	while True:
-		print 'eval'
 
 		barrierMutex.acquire()
 		test = eval()
-		print (test)
 		barrierMutex.release()
 		time.sleep(1)
 	return
@@ -191,10 +187,12 @@ def eval():
 		changeLights( 1, 2)
 
 	#print(int(intersection[1].trafficLight))
+	print("VALUE OF ROAD 1: " + str(value1))
+	print("VALUE OF ROAD 2: " + str(value2)+'\n')
 	return (value1,value2, numCars1, numCars2, intersection[1].waitTime, intersection[2].waitTime, intersection[1].avgNumCars, intersection[2].avgNumCars)
 
 def changeLights(roadNumberToTurnOff, roadNumberToTurnOn):
-	time.sleep(7)
+	time.sleep(3)
 	sendData(roadNumberToTurnOff)
 
 	intersection[roadNumberToTurnOff].trafficLight = 'red'
