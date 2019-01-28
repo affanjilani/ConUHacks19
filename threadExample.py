@@ -192,7 +192,7 @@ def eval():
 	return (value1,value2, numCars1, numCars2, intersection[1].waitTime, intersection[2].waitTime, intersection[1].avgNumCars, intersection[2].avgNumCars)
 
 def changeLights(roadNumberToTurnOff, roadNumberToTurnOn):
-	time.sleep(3)
+	time.sleep(1)
 	sendData(roadNumberToTurnOff)
 
 	intersection[roadNumberToTurnOff].trafficLight = 'red'

@@ -25,16 +25,16 @@ def carSeparator(croppedIm, roadNumber):
 
     #cut the cropped  image to 4 quadrants and the intersection
     if roadNumber == 1:
-        quad1 = croppedIm[2950:3460,972:1282]
-        quad2 = croppedIm[2646:3012,1136:1394]
-        quad3 = croppedIm[2590:2916,754:1084]
-        quad4 = croppedIm[2912:3306,518:870]
+        quad1 = croppedIm[2806:3134,1338:1770]
+        quad2 = croppedIm[2970:3294,1138:1426]
+        quad3 = croppedIm[2650:3010,966:1346]
+        quad4 = croppedIm[2432:2734,1226:1638]
         intersection = croppedIm[3670:, 0:970]
     else:
-        quad1 = croppedIm[1520:1876,1732:2060]
-        quad2 = croppedIm[1224:1540,1812:2112]
-        quad3 = croppedIm[1204:1512,1464:1772]
-        quad4 = croppedIm[1472:1848,1340:1676]
+        quad1 = croppedIm[1950:2258,1578:1974]
+        quad2 = croppedIm[2080:2410,1300:1644]
+        quad3 = croppedIm[1732:2078,1208:1580]
+        quad4 = croppedIm[1574:1916,1494:1894]
         intersection = croppedIm[2060:2850,830:1990]
 
     #save the images
